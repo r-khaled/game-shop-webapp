@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -96,4 +97,88 @@ export default function FormDialog(props) {
             </Dialog>
         </div>
     );
+}
+*/
+import React, { useState } from "react";
+import "./dialog.css";
+import axios from "axios";
+
+export default function FormDialog(props) {
+  const [editValues, setEditValues] = useState({
+    id: props.id,
+    name: props.name,
+    cost: props.cost,
+    category: props.category,
+  });
+
+  const handleChangeValues = (e) => {
+    setEditValues((prevValues) => ({
+      ...prevValues,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleEditValues = () => {
+    axios
+      .put("http://localhost:3001/edit", editValues)
+      .then(() => {
+        props.onUpdate(); // علشان بعد التعديل يعيد تحميل البيانات
+        handleSave();
+        handleClose();
+      })
+      .catch((err) => console.log(err));
+
+  };
+  const handleSave = () => {
+  const updatedGame = { id, name: newName, cost: newCost, category: newCategory };
+  onUpdate(updatedGame); // تبعت للأب
+  setOpen(false); // تقفل الـ dialog بعد ما ترسل
+};
+
+
+  const handleClose = () => {
+    props.setOpen(false);
+  };
+
+  return (
+    <>
+      {props.open && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h2>Edit Game</h2>
+            <input
+              type="text"
+              name="name"
+              placeholder="Title"
+              defaultValue={props.name}
+              onChange={handleChangeValues}
+            />
+            <input
+              type="text"
+              name="cost"
+              placeholder="Cost"
+              defaultValue={props.cost}
+              onChange={handleChangeValues}
+            />
+            <input
+              type="text"
+              name="category"
+              placeholder="Category"
+              defaultValue={props.category}
+              onChange={handleChangeValues}
+            />
+
+            <div className="modal-actions">
+              <button className="cancel" onClick={handleClose}>
+                Cancel
+              </button>
+              <button className="save" onClick={handleEditValues}>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
