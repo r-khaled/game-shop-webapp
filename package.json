@@ -1,0 +1,31 @@
+{
+  "name": "game-shop-webapp",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm start --prefix client\" \"npm start --prefix server\"",
+    "install-all": "npm install --prefix client && npm install --prefix server",
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "build": "npm run build --prefix client",
+    "lint": "npm run lint --prefix client",
+    "preview": "npm run preview --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "description": "<p align=\"center\">   <img src=\"https://logospng.org/download/react/logo-react-256.png\" />   <img src=\"https://logospng.org/download/node-js/logo-node-js-256.png\" />   <img src=\"https://logospng.org/download/mysql/mysql-256.png\" /> </p>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-khaled/game-shop-webapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r-khaled/game-shop-webapp/issues"
+  },
+  "homepage": "https://github.com/r-khaled/game-shop-webapp#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "mysql2": "^3.15.1"
+  }
+}

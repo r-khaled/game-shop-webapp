@@ -1,6 +1,6 @@
 const express = require('express');
 const server = express();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 const db = mysql.createPool({
@@ -9,6 +9,15 @@ const db = mysql.createPool({
     password: "nailton123",
     database: "crudgames",
 });
+db.getConnection((err, connection) => {
+  if (err) {
+    console.error("Database connection failed:", err);
+  } else {
+    console.log("✅ Database connected!");
+    connection.release();
+  }
+});
+
 
 server.use(express.json());
 server.use(cors());

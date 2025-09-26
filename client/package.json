@@ -3,9 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "start": "vite dev",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:dev": "vite build --mode development",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
